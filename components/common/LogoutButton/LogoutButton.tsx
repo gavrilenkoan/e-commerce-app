@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth.store";
+import styles from "./LogoutButton.module.scss";
 
 const LogoutButton = () => {
     const logout = useAuthStore((s) => s.logout);
@@ -12,7 +13,11 @@ const LogoutButton = () => {
         router.push("/login");
     };
 
-    return <button onClick={handleLogout}>Logout</button>;
-}
+    return (
+        <button className={styles.button} onClick={handleLogout}>
+            Logout
+        </button>
+    );
+};
 
-export default LogoutButton
+export default LogoutButton;

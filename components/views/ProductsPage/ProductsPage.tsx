@@ -1,4 +1,6 @@
 import { api } from "@/lib/api";
+import ProductCard from "@/components/common/ProductCard/ProductCard";
+import styles from "./ProductsPage.module.scss";
 
 type Product = {
     id: number;
@@ -8,19 +10,23 @@ type Product = {
 };
 
 const ProductsPage = async () => {
-    const data = await api<{ products: Product[] }>("/products");
+    const data = await api<{ products: Product[] }>("/products?limit=0");
 
     return (
-        <div>
+        <div className={styles.grid}>
             {data.products.map((p) => (
-                <div key={p.id}>
-                    <img src={p.thumbnail} />
-                    <h3>{p.title}</h3>
-                    <p>${p.price}</p>
-                </div>
+                <ProductCard
+                    key={p.id}
+                    id={p.id}
+                    title={p.title}
+                    price={p.price}
+                    thumbnail={p.thumbnail}
+                />
             ))}
         </div>
     );
 }
+
+// infinity (loader) scroll
 
 export default ProductsPage
