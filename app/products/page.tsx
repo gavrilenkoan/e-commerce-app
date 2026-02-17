@@ -1,3 +1,5 @@
-export default function ProductsPage () {
-    return <div></div>
-}
+import ProductsPage from "@/components/views/ProductsView"; 
+
+const Page = () => <ProductsPage />;
+
+export default Page
