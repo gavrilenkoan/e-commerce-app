@@ -3,6 +3,7 @@
 import { Product } from "@/types/product"
 import { useEffect, useState } from "react"
 import Image from "next/image";
+import styles from "./Carousel.module.scss";
 
 export const Carousel = ({ products }: { products: Product[]}) => {
 
@@ -19,18 +20,23 @@ export const Carousel = ({ products }: { products: Product[]}) => {
     const currentProduct = products[current];
 
     return (
-        <div>
-            {currentProduct.images && currentProduct.images[0] && (
-                <div>
-                    <Image 
-                        alt={currentProduct.title}
-                        src={currentProduct.images[0]}
-                        width={200}
-                        height={200}
-                    />
-                </div>
-            )}
-            <div>
+        <div className={styles.carousel}>
+            <div className={styles.imageWrapper}>
+                {currentProduct.images && currentProduct.images[0] && (
+                    <div className={styles.imageWrapper}>
+                        <Image
+                            src={currentProduct.images[0]}
+                            alt={currentProduct.title}
+                            fill
+                            className={styles.bgImage}
+                            priority
+                        />
+                        <div className={styles.overlay} />
+                    </div>
+                )}
+            </div>
+
+            <div className={styles.info}>
                 <h3>{currentProduct.title}</h3>
                 <h2>${currentProduct.price}</h2>
             </div>

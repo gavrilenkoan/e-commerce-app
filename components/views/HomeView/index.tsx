@@ -2,6 +2,7 @@ import { Carousel } from "@/components/common/Carousel/Carousel";
 import { Product } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./HomePage.module.scss";
 
 const HomePage = async () => {
 
@@ -17,23 +18,27 @@ const HomePage = async () => {
     const products = data.products;
 
     return (
-        <div>
-            <section>
-                <div>
-                    <div>
+        <div className={styles.container}>
+            <section className={styles.hero}>
+                <div className={styles.heroContent}>
+                    <div className={styles.textBlock}>
                         <h2>Welcome to The Store</h2>
                         <p>Discover the latest products at the best prices.</p>
-                        <Link href="/products">Browse All Products</Link>
+                        <Link href="/products" className={styles.cta}>Browse All Products</Link>
                     </div>
-                    <Image 
-                        alt = "Banner Image"
-                        width={450}
-                        height={450}
-                        src={products[0].images[0]}
-                    />
+                    <div className={styles.heroImage}>
+                        <Image 
+                            alt = "Banner Image"
+                            width={450}
+                            height={450}
+                            src={products[0].images[0]}
+                        />
+                    </div>
                 </div>
             </section>
-            <section><Carousel products={products}/></section>
+            <section className={styles.carouselSection}>
+                <Carousel products={products}/>
+            </section>
         </div>
     );
 };
