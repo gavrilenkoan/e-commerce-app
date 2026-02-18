@@ -4,10 +4,6 @@ import { ProductCard } from "../ProductCard/ProductCard"
 export const ProductsList = ({ products }: { products: Product[]}) => {
     return (
         <div>
-            <div>
-                <input type="text" placeholder="Search products..." />
-            </div>
-
             <ul>
                 {products.map(p => {
                     return <li key={p.id}>
