@@ -1,7 +1,25 @@
+"use client";
+
+import { useCartStore } from "@/store/cart-store";
 import { Product } from "@/types/product";
 import Image from "next/image"
 
 const ProductPage = ({ product }: { product: Product }) => {
+
+    const { items, addItem, removeItem } = useCartStore();
+    const cartItem = items.find(i => i.id === product.id);
+    const quantity = cartItem ? cartItem.quantity : 0;
+
+    const onAddItem = () => {
+        addItem({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.images ? (product.images[0] ? product.images[0] : null) : null,
+            quantity: 1,
+        })
+    }
+
     return (
         <div>
             {product.images && product.images[0] && (
@@ -25,9 +43,9 @@ const ProductPage = ({ product }: { product: Product }) => {
             </div>
 
             <div>
-                <button>-</button>
-                <span>0</span>
-                <button>+</button>
+                <button onClick={() => removeItem(product.id)}>-</button>
+                <span>{quantity}</span>
+                <button onClick={onAddItem}>+</button>
             </div>
         </div>
     )
