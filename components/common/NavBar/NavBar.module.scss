@@ -1,0 +1,101 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: #111;
+    color: white;
+    position: relative;
+}
+
+.logo a {
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.links {
+    display: flex;
+    gap: 24px;
+
+    a {
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 999px;
+}
+
+.menuButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    background-color: #111;
+
+    a {
+        display: block;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 10px 30px;
+        border-top: solid #1a1a1a 1px;
+
+        &:hover {
+            background-color: #1a1a1a;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .links {
+        display: none;
+    }
+
+    .menuButton {
+        display: block;
+    }
+
+    .mobileMenu {
+        display: flex;
+    }
+}
