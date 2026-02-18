@@ -14,15 +14,20 @@ const ProductsPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(false);
 
+    const [query, setQuery] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+
     useEffect(() => {
         const fetchProducts = async () => {
             setLoading(true);
 
             const skip = (page - 1) * LIMIT;
 
-            const res = await fetch(
-                `https://dummyjson.com/products?limit=${LIMIT}&skip=${skip}`
-            );
+            const baseUrl = searchTerm
+                ? `https://dummyjson.com/products/search?q=${searchTerm}&limit=${LIMIT}&skip=${skip}`
+                : `https://dummyjson.com/products?limit=${LIMIT}&skip=${skip}`;
+
+            const res = await fetch(baseUrl);
 
             if (!res.ok) {
                 throw new Error("Failed to fetch products");
@@ -39,25 +44,44 @@ const ProductsPage = () => {
         };
 
         fetchProducts();
-    }, [page]);
+    }, [page, searchTerm]);
+
+    const handleSearch = () => {
+        setPage(1);
+        setSearchTerm(query);
+    };
 
     return (
         <div>
             <h1>All Products</h1>
 
-            <input type="text" placeholder="Search products..." />
+            <div>
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                <button onClick={handleSearch}>
+                    Search
+                </button>
+            </div>
 
             {loading ? (
                 <p>Loading...</p>
+            ) : products.length === 0 ? (
+                <p>No results</p>
             ) : (
                 <ProductsList products={products} />
             )}
 
-            <Pagination
-                page={page}
-                totalPages={totalPages}
-                onPageChange={setPage}
-            />
+            {totalPages > 1 && (
+                <Pagination
+                    page={page}
+                    totalPages={totalPages}
+                    onPageChange={setPage}
+                />
+            )}
         </div>
     );
 };
