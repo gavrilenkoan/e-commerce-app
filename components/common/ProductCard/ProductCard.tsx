@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export const ProductCard = ({ product }: { product: Product}) => {
     return (
-        <Link href="/products/1">
+        <Link href={`/products/${product.id}`}>
             <div>
                 {product.images && product.images[0] && (
                     <div>
@@ -16,14 +16,19 @@ export const ProductCard = ({ product }: { product: Product}) => {
                         />
                     </div>
                 )}
+
                 <div>
                     <h2>{product.title}</h2>
                 </div>
+
                 <div>
                     <p>{product.description}</p>
                     <h3>${product.price}</h3>
                 </div>
-                <Link href="/products/1">View Details</Link>
+
+                <span>
+                    View Details
+                </span>
             </div>
         </Link>
     )
