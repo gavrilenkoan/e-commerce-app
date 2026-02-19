@@ -3,6 +3,7 @@
 import { useCartStore } from "@/store/cart-store";
 import { Product } from "@/types/product";
 import Image from "next/image"
+import styles from "./ProductPage.module.scss";
 
 const ProductPage = ({ product }: { product: Product }) => {
 
@@ -21,31 +22,33 @@ const ProductPage = ({ product }: { product: Product }) => {
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             {product.images && product.images[0] && (
-                <div>
+                <div className={styles.imageWrapper}>
                     <Image 
                         alt={product.title}
                         src={product.images[0]}
                         width={200}
                         height={200}
+                        className={styles.image}
                     />
                 </div>
             )}
 
-            <div>
-                <h2>{product.title}</h2>
-            </div>
+            <div className={styles.infoSection}>
+                <div>
+                    <h2 className={styles.title}>{product.title}</h2>
+                    <p className={styles.description}>{product.description}</p>
+                </div>
 
-            <div>
-                <p>{product.description}</p>
-                <h3>${product.price}</h3>
-            </div>
-
-            <div>
-                <button onClick={() => removeItem(product.id)}>-</button>
-                <span>{quantity}</span>
-                <button onClick={onAddItem}>+</button>
+                <div>
+                    <h3 className={styles.price}>${product.price}</h3>
+                    <div className={styles.quantity}>
+                        <button onClick={() => removeItem(product.id)}>-</button>
+                        <span>{quantity}</span>
+                        <button onClick={onAddItem}>+</button>
+                    </div>
+                </div>                
             </div>
         </div>
     )
