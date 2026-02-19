@@ -1,3 +1,5 @@
+import styles from "./Pagination.module.scss";
+
 export const Pagination = ({ 
     page, 
     totalPages, 
@@ -8,7 +10,7 @@ export const Pagination = ({
     onPageChange: (page: number) => void
 }) => {
     return (
-        <div>
+        <div className={styles.pagination}>
             <button
                 onClick={() => onPageChange(page - 1)}
                 disabled={page === 1}
@@ -29,7 +31,7 @@ export const Pagination = ({
                 </button>
             )}
 
-            <button>
+            <button className={styles.active}>
                 {page}
             </button>
 

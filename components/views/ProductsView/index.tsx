@@ -4,6 +4,7 @@ import { Pagination } from "@/components/common/Pagination/Pagination";
 import { ProductsList } from "@/components/common/ProductsList/ProductsList";
 import { Product } from "@/types/product";
 import { useEffect, useState } from "react";
+import styles from "./ProductsPage.module.scss";
 
 const LIMIT = 30;
 
@@ -52,10 +53,10 @@ const ProductsPage = () => {
     };
 
     return (
-        <div>
-            <h1>All Products</h1>
+        <div className={styles.wrapper}>
+            <h1 className={styles.title}>All Products</h1>
 
-            <div>
+            <div className={styles.searchBar}>
                 <input
                     type="text"
                     placeholder="Search products..."
