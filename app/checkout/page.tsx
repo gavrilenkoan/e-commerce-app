@@ -1,3 +1,5 @@
-export default function CheckoutPage () {
-    return <div></div>
-}
+import CheckoutPage from "@/components/views/CheckoutView"; 
+
+const Page = () => <CheckoutPage />;
+
+export default Page
